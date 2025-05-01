@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Subir Fotos</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin: 50px; }
+    input[type="file"] { margin-top: 20px; }
+    img { max-width: 200px; margin: 10px; border: 1px solid #ccc; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Sube tus Fotos</h1>
+  <input type="file" accept="image/*" multiple onchange="previewImages(event)">
+  <div id="preview"></div>
+
+  <script>
+    function previewImages(event) {
+      const preview = document.getElementById('preview');
+      preview.innerHTML = '';
+      const files = event.target.files;
+      for (const file of files) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>
